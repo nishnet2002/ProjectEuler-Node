@@ -1,1 +1,5 @@
 ._*.js
+._.*
+node_modules/
+*.swp
+.DS*
