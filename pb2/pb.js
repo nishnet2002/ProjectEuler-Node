@@ -9,32 +9,31 @@
  */
 
 var fibGen = require('./../lib/fibs');
-
+var _ = require('lodash');
 
 var fib1 = new fibGen (4000000);
 var fib2 = new fibGen (4000);
 
 
-function getResult (fib) {
-	return function() {
-		var count = 0;
-		var curr = 0;
-		while(!fib.isMax()) {
-			curr = fib.getNext();
-			if (curr % 2 === 0) {
-				count += curr;
-			}
+var getResult = function getResult (fib) {
+	var count = 0;
+	var curr = 0;
+	while(!fib.isMax()) {
+		curr = fib.getNext();
+		if (curr % 2 === 0) {
+			count += curr;
 		}
-		return count;
-	};
+	}
+	return count;
 }
-
-var resultOne = getResult (fib1);
-var resultTwo = getResult (fib2);
+/* Using Parials ;) */
+var resultOne = _.partial(getResult, fib1);
+var resultTwo = _.partial(getResult, fib2);
 
 console.log(resultOne());
 console.log(resultTwo());
 fib1.reset()
 console.log(resultOne());
+console.log(resultTwo());
 
 
